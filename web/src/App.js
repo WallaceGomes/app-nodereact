@@ -3,6 +3,7 @@ import React from 'react';
 import './global.css';
 import './App.css';
 import './Sidebar.css';
+import './Main.css';
 
 //Componente - Bloco isolado de HTML, CSS e JS, o qual não interfere no restante da aplicação
 //Estado - Informações mantidas pelo componente (Lembrar imutabilidade)
@@ -39,7 +40,50 @@ function App() {
         </form>
       </aside>
       <main>
-
+        <li className="dev-item">
+            <header>
+                <img src="https://avatars2.githubusercontent.com/u/43701494?s=400&v=4" alt="Wallace Gomes"/>
+                <div className="user-info">
+                    <strong>Wallace Gomes</strong>
+                    <span>ReactJS, React Native, Node.js</span>
+                </div>
+            </header>
+            <p>Desenvolvedor JR</p>
+            <a href="https://github.com/WallaceGomes">Acessar Perfil no Github</a>
+        </li>
+        <li className="dev-item">
+            <header>
+                <img src="https://avatars2.githubusercontent.com/u/43701494?s=400&v=4" alt="Wallace Gomes"/>
+                <div className="user-info">
+                    <strong>Wallace Gomes</strong>
+                    <span>ReactJS, React Native, Node.js</span>
+                </div>
+            </header>
+            <p>Desenvolvedor JR</p>
+            <a href="https://github.com/WallaceGomes">Acessar Perfil no Github</a>
+        </li>
+        <li className="dev-item">
+            <header>
+                <img src="https://avatars2.githubusercontent.com/u/43701494?s=400&v=4" alt="Wallace Gomes"/>
+                <div className="user-info">
+                    <strong>Wallace Gomes</strong>
+                    <span>ReactJS, React Native, Node.js</span>
+                </div>
+            </header>
+            <p>Desenvolvedor JR</p>
+            <a href="https://github.com/WallaceGomes">Acessar Perfil no Github</a>
+        </li>
+        <li className="dev-item">
+            <header>
+                <img src="https://avatars2.githubusercontent.com/u/43701494?s=400&v=4" alt="Wallace Gomes"/>
+                <div className="user-info">
+                    <strong>Wallace Gomes</strong>
+                    <span>ReactJS, React Native, Node.js</span>
+                </div>
+            </header>
+            <p>Desenvolvedor JR</p>
+            <a href="https://github.com/WallaceGomes">Acessar Perfil no Github</a>
+        </li>
       </main>
     </div>
   );
