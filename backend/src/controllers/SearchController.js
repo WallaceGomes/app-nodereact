@@ -23,6 +23,6 @@ module.exports = {
         });
         //buscar todos os devs raio 10km
         //filtrar por techs
-        return response.json({ devs });
+        return response.json( devs );
     }
 }
