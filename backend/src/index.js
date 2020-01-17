@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const routes = require('./routes');
 
 const app = express();
@@ -10,6 +11,8 @@ mongoose.connect('mongodb+srv://nodereact:nodereact@cluster0-2s2v2.mongodb.net/t
     useFindAndModify:true,
     useCreateIndex:true
 });
+
+app.use(cors());
 
 app.use(express.json()); //habilita o uso do json nos métodos HTTP
 

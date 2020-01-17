@@ -1,89 +1,54 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import api from './services/api';
 
 import './global.css';
 import './App.css';
 import './Sidebar.css';
 import './Main.css';
+import DevIten from './components/DevItem';
+import DevForm from './components/DevForm';
 
 //Componente - Bloco isolado de HTML, CSS e JS, o qual não interfere no restante da aplicação
 //Estado - Informações mantidas pelo componente (Lembrar imutabilidade)
 //Proprieadade - Informações que um componente pai passa para o componente filho
+//programação imperativa
+//dev.techs é um array de strings logo ele precisa ser concatenada com join
 
 function App() {
+  const [devs, setDevs] = useState([]); //devs inicia com um array vazio e vai guardando e mostrando
+
+  useEffect(() =>{
+    async function loadDevs() {
+      const response = await api.get('/devs');
+
+      setDevs(response.data);
+    }
+
+    loadDevs();
+  }, []);
+
+  async function handleAddDev(data) { 
+
+    const response = await api.post('/devs', data);
+
+    // adicionar um novo dev toda vez que ele for cadastrado
+    // ...devs == copia todos os devs que já estão cadastrados
+    // e pega a nova resposta recebida e adiciona nesse novo array copiado
+    setDevs([...devs, response.data]);
+  }
+    //onSubmit está passando uma função para o DevForm, isso é possível
   return (
     <div id="app">
       <aside>
         <strong>Cadastrar</strong>
-        <form>
-          <div className="input-block">
-            <label htmlFor="github_username">Usuário do Github</label>
-            <input name="github_username" id="github_username" required/>
-          </div>
-
-          <div className="input-block">
-            <label htmlFor="techs">Tecnologias</label>
-            <input name="techs" id="techs" required/>
-          </div>
-          
-          <div className="input-group">
-            <div className="input-block">
-              <label htmlFor="latitude">Latitude</label>
-              <input name="latitude" id="latitude" required/>
-            </div>
-
-            <div className="input-block">
-              <label htmlFor="longitude">Longitude</label>
-              <input name="longitude" id="longitude" required/>
-            </div>
-          </div>
-          <button type="submit">Salvar</button>
-        </form>
+        <DevForm onSubit={handleAddDev} />
       </aside>
       <main>
-        <li className="dev-item">
-            <header>
-                <img src="https://avatars2.githubusercontent.com/u/43701494?s=400&v=4" alt="Wallace Gomes"/>
-                <div className="user-info">
-                    <strong>Wallace Gomes</strong>
-                    <span>ReactJS, React Native, Node.js</span>
-                </div>
-            </header>
-            <p>Desenvolvedor JR</p>
-            <a href="https://github.com/WallaceGomes">Acessar Perfil no Github</a>
-        </li>
-        <li className="dev-item">
-            <header>
-                <img src="https://avatars2.githubusercontent.com/u/43701494?s=400&v=4" alt="Wallace Gomes"/>
-                <div className="user-info">
-                    <strong>Wallace Gomes</strong>
-                    <span>ReactJS, React Native, Node.js</span>
-                </div>
-            </header>
-            <p>Desenvolvedor JR</p>
-            <a href="https://github.com/WallaceGomes">Acessar Perfil no Github</a>
-        </li>
-        <li className="dev-item">
-            <header>
-                <img src="https://avatars2.githubusercontent.com/u/43701494?s=400&v=4" alt="Wallace Gomes"/>
-                <div className="user-info">
-                    <strong>Wallace Gomes</strong>
-                    <span>ReactJS, React Native, Node.js</span>
-                </div>
-            </header>
-            <p>Desenvolvedor JR</p>
-            <a href="https://github.com/WallaceGomes">Acessar Perfil no Github</a>
-        </li>
-        <li className="dev-item">
-            <header>
-                <img src="https://avatars2.githubusercontent.com/u/43701494?s=400&v=4" alt="Wallace Gomes"/>
-                <div className="user-info">
-                    <strong>Wallace Gomes</strong>
-                    <span>ReactJS, React Native, Node.js</span>
-                </div>
-            </header>
-            <p>Desenvolvedor JR</p>
-            <a href="https://github.com/WallaceGomes">Acessar Perfil no Github</a>
-        </li>
+        <ul>
+          {devs.map(dev => ( //key={dev._id} todo item da lista percorrida deve conter um identificador único
+            <DevIten key={dev._id} dev={dev} />
+          ))}
+        </ul>  
       </main>
     </div>
   );
